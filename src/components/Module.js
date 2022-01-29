@@ -2,7 +2,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
 const Module = (props) => {
-  const { name, grade, credit } = props
+  const { name, grade, credits } = props
 
   return (
     <TableRow>
@@ -10,7 +10,7 @@ const Module = (props) => {
         {name}
       </TableCell>
       <TableCell align="right">{grade}</TableCell>
-      <TableCell align="right">{credit}</TableCell>
+      <TableCell align="right">{credits}</TableCell>
     </TableRow>
   )
 }

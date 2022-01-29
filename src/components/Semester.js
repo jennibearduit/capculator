@@ -5,8 +5,28 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Module from './Module';
+import { useState } from 'react';
+
+const mockModules = [
+  {
+    name: "CS1010",
+    grade: "A",
+    credits: 4,
+  },
+  {
+    name: "CS1101",
+    grade: "A",
+    credits: 4,
+  },
+  {
+    name: "CS1231",
+    grade: "A",
+    credits: 4,
+  }
+]
 
 const Semester = (props) => {
+  const [modules, setModules] = useState([...mockModules])
   const { name } = props
 
   return (
@@ -21,11 +41,9 @@ const Semester = (props) => {
               <TableCell align="right">Credits</TableCell>
             </TableRow>
           </TableHead>
-          <Module name="CS2030" grade="A" credit="4" />
-          <Module name="CS2040" grade="A" credit="4" />
-          <Module name="CS2102" grade="A" credit="4" />
-          <Module name="CS2103" grade="A" credit="4" />
-          <Module name="CS3230" grade="A" credit="4" />
+          {modules.map(m => (
+            <Module name={m.name} grade={m.grade} credits={m.credits} />
+          ))}
         </Table>
       </TableContainer>
     </>
