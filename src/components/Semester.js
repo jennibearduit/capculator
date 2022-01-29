@@ -6,6 +6,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Module from './Module';
 import { useState } from 'react';
+import { Button } from '@mui/material';
 
 const mockModules = [
   {
@@ -29,6 +30,10 @@ const Semester = (props) => {
   const [modules, setModules] = useState([...mockModules])
   const { name } = props
 
+  const handleClick = () => {
+    window.alert("Form not implemented yet! :)")
+  }
+
   return (
     <>
       <h3>{name}</h3>
@@ -45,7 +50,11 @@ const Semester = (props) => {
             <Module name={m.name} grade={m.grade} credits={m.credits} />
           ))}
         </Table>
+        <Button onClick={handleClick} padding={4}>
+          Add New Module
+        </Button>
       </TableContainer>
+      
     </>
   )
 }

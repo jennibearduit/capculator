@@ -7,6 +7,11 @@ const counter = 4
 
 const App = () => {
   const [semesters, setSemesters] = useState([...mockSemesters])
+  console.log(semesters);
+
+  const handleClick = () => {
+    window.alert("Form not implemented yet! :)")
+  }
 
   return (
     <>
@@ -17,6 +22,11 @@ const App = () => {
             <Semester name={sem} />
           </Grid>
         ))}
+        <Grid item xs={12} md={12}>
+          <Button onClick={handleClick} variant="contained">
+            Add New Semester
+          </Button>
+        </Grid>
       </Grid>
     </>
   );
