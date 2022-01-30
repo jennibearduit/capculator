@@ -30,6 +30,18 @@ const ModuleForm = (props) => {
   }
 
   const handleSubmit = () => {
+    if (!name) {
+      window.alert("Please fill in a module name!");
+      return;
+    }
+    if (!credits) {
+      window.alert("Please fill in the module credits!");
+      return;
+    }
+    if (!grade) {
+      window.alert("Please fill in the module grade!");
+      return;
+    }
     const moduleData = {
       name,
       credits,

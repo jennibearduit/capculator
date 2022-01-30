@@ -7,6 +7,10 @@ const SemesterForm = (props) => {
   const [name, setName] = useState("");
 
   const handleSubmit = () => {
+    if (!name) {
+      window.alert("Please fill in the semester name!");
+      return;
+    }
     onSubmit(name);
   }
 
