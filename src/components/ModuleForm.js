@@ -21,6 +21,9 @@ const ModuleForm = (props) => {
   }
 
   const handleDelete = () => {
+    if (!window.confirm("Delete this module?")) {
+      return;
+    }
     onDelete();
     handleClose();
   }

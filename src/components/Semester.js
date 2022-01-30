@@ -9,30 +9,12 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 
 import Module from './Module';
-
-
-const mockModules = [
-  {
-    name: "CS1010",
-    grade: "A",
-    credits: 4,
-  },
-  {
-    name: "CS1101",
-    grade: "A",
-    credits: 4,
-  },
-  {
-    name: "CS1231",
-    grade: "A",
-    credits: 4,
-  }
-]
+import { loadModules, saveModules } from '../storage/storage';
 
 const Semester = (props) => {
-  const [ modules, setModules ] = useState([...mockModules])
-  const [ open, setOpen ] = useState(false)
   const { name } = props
+  const [ modules, setModules ] = useState(loadModules(name) ?? [])
+  const [ open, setOpen ] = useState(false)
 
   const handleOpen = () => {
     setOpen(true);
@@ -43,25 +25,28 @@ const Semester = (props) => {
   }
 
   const handleSave = (mod) => {
-    setModules(modules.concat(mod));
+    const updatedModules = modules.concat(mod);
+    setModules(updatedModules);
+    saveModules(name, updatedModules);
   }
 
   const handleEdit = (idx) => (mod) => {
     const updatedModules = [...modules];
     updatedModules[idx] = mod;
     setModules(updatedModules);
+    saveModules(name, updatedModules);
   }
 
   const handleDelete = (idx) => () => {
     const updatedModules = [...modules];
     updatedModules.splice(idx, 1);
-    console.log(updatedModules)
     setModules(updatedModules);
+    saveModules(name, updatedModules);
   }
 
   return (
     <>
-      <h3>{name}</h3>
+      <h3 onClick={handleOpen}>{name}</h3>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
