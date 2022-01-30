@@ -6,8 +6,9 @@ import { loadSemesters, saveSemesters } from './storage/storage';
 import { getCumulativeReport } from './logic/logic';
 
 const App = () => {
-  const [semesters, setSemesters] = useState(loadSemesters() ?? [])
-  const [open, setOpen] = useState(false)
+  const [semesters, setSemesters] = useState(loadSemesters() ?? []);
+  const [cumulativeReport, setCumulativeReport] = useState(getCumulativeReport() ?? null);
+  const [open, setOpen] = useState(false);
   console.log(semesters);
 
   const handleOpen = () => {
@@ -39,17 +40,29 @@ const App = () => {
     saveSemesters(updatedSemesters)
   }
 
-  const cumulativeReport = getCumulativeReport();
+  const refreshCap = () => {
+    setCumulativeReport(getCumulativeReport());
+  }
+
   const cap = cumulativeReport.cap.toFixed(2);
 
   return (
     <>
       <h1 style={{ textAlign: "center" }}>NUS CAPculator</h1>
-      <h2 style={{ textAlign: "center" }}>CAP: {cap}</h2>
+      <Grid container alignItems="center">
+        <Grid item xs={12} md={6} paddingRight={2}>
+          <h2 style={{ textAlign: "right" }}>CAP: {cap}</h2>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Button onClick={refreshCap} paddingLeft={2}>
+            Refresh CAP
+          </Button>
+        </Grid>
+      </Grid>
       <Grid container spacing={2} padding={4}>
         {semesters.map(sem => (
           <Grid item xs={12} md={6}>
-            <Semester name={sem}/>
+            <Semester name={sem} />
           </Grid>
         ))}
         <Grid item xs={12} md={12}>
@@ -58,7 +71,7 @@ const App = () => {
           </Button>
         </Grid>
       </Grid>
-      <SemesterForm open={open} onSubmit={handleSave} onClose={handleClose} onEdit={handleEdit} onDelete={handleDelete}/>    
+      <SemesterForm open={open} onSubmit={handleSave} onClose={handleClose} onEdit={handleEdit} onDelete={handleDelete} />
     </>
   );
 }

@@ -2,7 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent, TextField } from "@mui/ma
 import { useState } from "react";
 
 const SemesterForm = (props) => {
-  const { open, onSubmit, onClose: handleClose, onEdit, onDelete } = props;
+  const { open, onSubmit, onClose: handleClose } = props;
 
   const [name, setName] = useState("");
 
