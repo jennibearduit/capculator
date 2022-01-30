@@ -44,7 +44,19 @@ const Semester = (props) => {
 
   const handleSave = (mod) => {
     setModules(modules.concat(mod));
-    setOpen(false);
+  }
+
+  const handleEdit = (idx) => (mod) => {
+    const updatedModules = [...modules];
+    updatedModules[idx] = mod;
+    setModules(updatedModules);
+  }
+
+  const handleDelete = (idx) => () => {
+    const updatedModules = [...modules];
+    updatedModules.splice(idx, 1);
+    console.log(updatedModules)
+    setModules(updatedModules);
   }
 
   return (
@@ -59,8 +71,8 @@ const Semester = (props) => {
               <TableCell align="right">Credits</TableCell>
             </TableRow>
           </TableHead>
-          {modules.map(m => (
-            <Module name={m.name} grade={m.grade} credits={m.credits} />
+          {modules.map((m, i) => (
+            <Module onEdit={handleEdit(i)} onDelete={handleDelete(i)} name={m.name} grade={m.grade} credits={m.credits} />
           ))}
         </Table>
         <Button onClick={handleOpen} padding={4}>

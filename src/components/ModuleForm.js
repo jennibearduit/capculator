@@ -2,11 +2,11 @@ import { Button, Dialog, DialogActions, DialogContent, InputLabel, MenuItem, Sel
 import { useState } from "react";
 
 const ModuleForm = (props) => {
-  const { open, onSubmit, onClose: handleClose } = props;
+  const { open, onSubmit, onClose: handleClose, module = null, edit = false, onDelete} = props;
 
-  const [name, setName] = useState("");
-  const [credits, setCredits] = useState(null)
-  const [grade, setGrade] = useState(null)
+  const [name, setName] = useState(module?.name ?? "");
+  const [credits, setCredits] = useState(module?.credits ?? null)
+  const [grade, setGrade] = useState(module?.grade ?? null)
 
   const handleGradeChange = (event) => {
     setGrade(event.target.value);
@@ -20,6 +20,11 @@ const ModuleForm = (props) => {
     setCredits(event.target.value);
   }
 
+  const handleDelete = () => {
+    onDelete();
+    handleClose();
+  }
+
   const handleSubmit = () => {
     const moduleData = {
       name,
@@ -27,14 +32,16 @@ const ModuleForm = (props) => {
       grade
     };
     onSubmit(moduleData);
+    handleClose();
   }
 
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogContent>
-        <TextField autoFocus
+        <TextField
           margin="normal"
           id="name"
+          value={name}
           onChange={handleNameChange}
           label="Module Name"
           fullWidth
@@ -43,6 +50,7 @@ const ModuleForm = (props) => {
         <TextField
           margin="normal"
           id="credits"
+          value={credits}
           onChange={handleCreditsChange}
           label="No. of Credits"
           fullWidth
@@ -65,7 +73,14 @@ const ModuleForm = (props) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleSubmit}>Add Module</Button>
+        <Button onClick={handleSubmit}>
+          Save
+        </Button>
+        {edit &&
+          <Button color="error" onClick={handleDelete}>
+            Remove
+          </Button>
+        }
       </DialogActions>
     </Dialog>
   )
