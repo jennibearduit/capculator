@@ -1,9 +1,9 @@
-import { Grid, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 
 const SemesterForm = (props) => {
   return (
     <TextField autoFocus 
-      margin="dense" 
+      margin="normal" 
       id="name" 
       label="Semester Name" 
       fullWidth 

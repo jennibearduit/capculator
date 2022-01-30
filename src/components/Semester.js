@@ -4,9 +4,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Module from './Module';
+import ModuleForm from './ModuleForm'
 import { useState } from 'react';
-import { Button } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
+
+import Module from './Module';
+
 
 const mockModules = [
   {
@@ -27,18 +30,28 @@ const mockModules = [
 ]
 
 const Semester = (props) => {
-  const [modules, setModules] = useState([...mockModules])
+  const [ modules, setModules ] = useState([...mockModules])
+  const [ open, setOpen ] = useState(false)
   const { name } = props
 
-  const handleClick = () => {
-    window.alert("Form not implemented yet! :)")
+  const handleOpen = () => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const handleSave = (mod) => {
+    setModules(modules.concat(mod));
+    setOpen(false);
   }
 
   return (
     <>
       <h3>{name}</h3>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Module Name</TableCell>
@@ -50,11 +63,11 @@ const Semester = (props) => {
             <Module name={m.name} grade={m.grade} credits={m.credits} />
           ))}
         </Table>
-        <Button onClick={handleClick} padding={4}>
+        <Button onClick={handleOpen} padding={4}>
           Add New Module
         </Button>
       </TableContainer>
-      
+      <ModuleForm open={open} onSubmit={handleSave} onClose={handleClose} />
     </>
   )
 }
