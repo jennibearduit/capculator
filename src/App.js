@@ -1,5 +1,5 @@
 import Semester from './components/Semester'
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, Grid } from '@mui/material';
 import { useState } from 'react';
 import SemesterForm from './components/SemesterForm';
 
@@ -40,7 +40,7 @@ const App = () => {
       </Grid>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <TextField autoFocus margin="dense" id="name" label="Semester Name" fullWidth variant="standard" />
+          <SemesterForm />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

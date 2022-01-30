@@ -2,9 +2,12 @@ import { Grid, TextField } from "@mui/material";
 
 const SemesterForm = (props) => {
   return (
-    <Grid container alignItems="center" direction="row" justifyContent="center">
-      <TextField id="outlined-basic" label="Semester Name" variant="outlined" />
-    </Grid>
+    <TextField autoFocus 
+      margin="dense" 
+      id="name" 
+      label="Semester Name" 
+      fullWidth 
+      variant="standard" />
   )
 }
 
