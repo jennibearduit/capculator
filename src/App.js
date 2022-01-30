@@ -1,10 +1,9 @@
 import Semester from './components/Semester'
-import { Button, Card, Grid, Modal } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField } from '@mui/material';
 import { useState } from 'react';
 import SemesterForm from './components/SemesterForm';
 
 const mockSemesters = [1, 2, 3, 4].map(i => `Semester ${i}`)
-const counter = 4
 
 const App = () => {
   const [semesters, setSemesters] = useState([...mockSemesters])
@@ -39,22 +38,15 @@ const App = () => {
           </Button>
         </Grid>
       </Grid>
-      <Modal open={open} onClose={handleClose}>
-        <Grid container alignItems="center" direction="row" justifyContent="center" spacing={2} padding={4}>
-          <Card>
-            <Grid container alignItems="center" direction="row" justifyContent="center" spacing={2} padding={4}>
-              <Grid item xs={12} md={12} padding={2}>
-                <SemesterForm />
-              </Grid>
-              <Grid item xs={12} md={12} padding={2}>
-                <Button onClick={handleClose} variant="contained">
-                  Add
-                </Button>
-              </Grid>
-            </Grid>
-          </Card>
-        </Grid>
-      </Modal>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
+          <TextField autoFocus margin="dense" id="name" label="Semester Name" fullWidth variant="standard" />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSave}>Add Semester</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
