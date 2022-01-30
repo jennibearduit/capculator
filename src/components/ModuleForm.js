@@ -54,11 +54,13 @@ const ModuleForm = (props) => {
         <TextField
           margin="normal"
           id="credits"
+          type="number"
           value={credits}
           onChange={handleCreditsChange}
           label="No. of Credits"
           fullWidth
           variant="standard"
+          inputProps={{ min: 0, max: 40 }}
         />
         <InputLabel id="demo-simple-select-standard-label">Grade</InputLabel>
         <Select
