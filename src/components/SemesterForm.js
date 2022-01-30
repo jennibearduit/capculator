@@ -2,9 +2,9 @@ import { Button, Dialog, DialogActions, DialogContent, TextField } from "@mui/ma
 import { useState } from "react";
 
 const SemesterForm = (props) => {
-  const { open, onSubmit, onClose: handleClose } = props;
+  const { open, onSubmit, onClose: handleClose, edit = false, name: semesterName = "", onDelete: handleDelete } = props;
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState(semesterName ?? "");
 
   const handleSubmit = () => {
     if (!name) {
@@ -21,12 +21,13 @@ const SemesterForm = (props) => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogContent>
-        <TextField autoFocus
+        <TextField
           margin="normal"
           id="name"
           onChange={handleNameChange}
           label="Semester Name"
           fullWidth
+          value={name}
           variant="standard"
         />
       </DialogContent>
@@ -35,8 +36,13 @@ const SemesterForm = (props) => {
           Cancel
         </Button>
         <Button onClick={handleSubmit}>
-          Add Semester
+          Save
         </Button>
+        {edit &&
+          <Button color="error" onClick={handleDelete}>
+            Delete
+          </Button>
+        }
       </DialogActions>
     </Dialog>
   )

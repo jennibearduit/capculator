@@ -10,11 +10,13 @@ import { Button } from '@mui/material';
 
 import Module from './Module';
 import { loadModules, saveModules } from '../storage/storage';
+import SemesterForm from './SemesterForm';
 
 const Semester = (props) => {
-  const { name } = props
+  const { name, onRename, onDelete } = props
   const [ modules, setModules ] = useState(loadModules(name) ?? [])
   const [ open, setOpen ] = useState(false)
+  const [ openEditSem, setOpenEditSem ] = useState(false)
 
   const handleOpen = () => {
     setOpen(true);
@@ -28,6 +30,19 @@ const Semester = (props) => {
     const updatedModules = modules.concat(mod);
     setModules(updatedModules);
     saveModules(name, updatedModules);
+  }
+
+  const handleRename = (sem) => {
+    onRename(sem);
+    setOpenEditSem(false);
+  }
+
+  const handleDeleteSemester = () => {
+    if (!window.confirm("Delete semester?")) {
+      return;
+    }
+    onDelete();
+    setOpenEditSem(false);
   }
 
   const handleEdit = (idx) => (mod) => {
@@ -44,9 +59,17 @@ const Semester = (props) => {
     saveModules(name, updatedModules);
   }
 
+  const handleOpenRename = () => {
+    setOpenEditSem(true);
+  }
+
+  const handleCloseRename = () => {
+    setOpenEditSem(false);
+  }
+
   return (
     <>
-      <h3 onClick={handleOpen}>{name}</h3>
+      <h3 onClick={handleOpenRename}>{name}</h3>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
@@ -65,6 +88,7 @@ const Semester = (props) => {
         </Button>
       </TableContainer>
       <ModuleForm open={open} onSubmit={handleSave} onClose={handleClose} />
+      <SemesterForm edit={true} name={name} open={openEditSem} onSubmit={handleRename} onClose={handleCloseRename} onDelete={handleDeleteSemester} />
     </>
   )
 }

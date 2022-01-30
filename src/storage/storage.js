@@ -18,7 +18,7 @@ export const saveModules = (sem, modules) => {
 export const loadModules = (sem) => {
   const json_mods = localStorage.getItem(sem);
   const modules = JSON.parse(json_mods);
-  return modules.map((m) => ({...m, credits: parseInt(m.credits)}))
+  return modules?.map((m) => ({...m, credits: parseInt(m.credits)}))
 }
 
 export const renameSemester = (oldName, newName) => {

@@ -19,12 +19,12 @@ const ungraded = ["S", "U", "CS", "CU", "IC", "IP"]
 export const gradeOptions = Object.keys(gradePointsMap).concat(ungraded)
 
 export const getCumulativeReport = () => {
-  const semesters = loadSemesters();
+  const semesters = loadSemesters() ?? [];
   let totalPoints = 0;
   let totalGradedCredits = 0;
   let totalCredits = 0;
   semesters.forEach((s) => {
-    const mods = loadModules(s);
+    const mods = loadModules(s) ?? [];
     mods.forEach((m) => {
       console.log(m)
       totalCredits += m.credits;
@@ -56,7 +56,7 @@ export const getSemesterReport = (sem) => {
   let totalPoints = 0;
   let totalGradedCredits = 0;
   let totalCredits = 0;
-  const mods = loadModules(sem);
+  const mods = loadModules(sem) ?? [];
   mods.forEach((m) => {
     totalCredits += m.credits;
     if (ungraded.includes(m.grade)) {

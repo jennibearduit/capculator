@@ -2,7 +2,7 @@ import Semester from './components/Semester'
 import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
 import SemesterForm from './components/SemesterForm';
-import { loadSemesters, saveSemesters } from './storage/storage';
+import { deleteSemester, loadSemesters, renameSemester, saveSemesters } from './storage/storage';
 import { getCumulativeReport } from './logic/logic';
 
 const App = () => {
@@ -20,6 +20,10 @@ const App = () => {
   }
 
   const handleSave = (sem) => {
+    if (semesters.includes(sem)) {
+      window.alert("Name already taken!");
+      return;
+    }
     const updatedSemesters = semesters.concat(sem);
     setSemesters(updatedSemesters);
     saveSemesters(updatedSemesters)
@@ -27,17 +31,29 @@ const App = () => {
   }
 
   const handleEdit = (idx) => (sem) => {
+    const oldName = semesters[idx];
+    if (sem === oldName) {
+      window.alert("Please provide a new name!");
+      return;
+    }
+    if (semesters.includes(sem)) {
+      window.alert("Name already taken!");
+      return;
+    }
     const updatedSemesters = [...semesters];
     updatedSemesters[idx] = sem;
     setSemesters(updatedSemesters);
-    saveSemesters(updatedSemesters)
+    saveSemesters(updatedSemesters);
+    renameSemester(oldName, sem);
   }
 
   const handleDelete = (idx) => () => {
     const updatedSemesters = [...semesters];
+    const deletedSemester = semesters[idx];
     updatedSemesters.splice(idx, 1);
     setSemesters(updatedSemesters);
-    saveSemesters(updatedSemesters)
+    saveSemesters(updatedSemesters);
+    deleteSemester(deletedSemester);
   }
 
   const refreshCap = () => {
@@ -60,9 +76,9 @@ const App = () => {
         </Grid>
       </Grid>
       <Grid container spacing={2} padding={4}>
-        {semesters.map(sem => (
+        {semesters.map((sem, i) => (
           <Grid item xs={12} md={6}>
-            <Semester name={sem} />
+            <Semester name={sem} onRename={handleEdit(i)} onDelete={handleDelete(i)} />
           </Grid>
         ))}
         <Grid item xs={12} md={12}>
@@ -71,7 +87,7 @@ const App = () => {
           </Button>
         </Grid>
       </Grid>
-      <SemesterForm open={open} onSubmit={handleSave} onClose={handleClose} onEdit={handleEdit} onDelete={handleDelete} />
+      <SemesterForm open={open} onSubmit={handleSave} onClose={handleClose} />
     </>
   );
 }
