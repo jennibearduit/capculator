@@ -1,5 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useState } from "react";
+import { gradeOptions } from "../logic/logic";
 
 const ModuleForm = (props) => {
   const { open, onSubmit, onClose: handleClose, module = null, edit = false, onDelete} = props;
@@ -67,11 +68,9 @@ const ModuleForm = (props) => {
           onChange={handleGradeChange}
           label="Age"
         >
-          <MenuItem value="A">A</MenuItem>
-          <MenuItem value="A-">A-</MenuItem>
-          <MenuItem value="B+">B+</MenuItem>
-          <MenuItem value="B">B</MenuItem>
-          <MenuItem value="B-">B-</MenuItem>
+          {gradeOptions.map((g) => (
+            <MenuItem value={g}>{g}</MenuItem>
+          ))}
         </Select>
       </DialogContent>
       <DialogActions>

@@ -3,6 +3,7 @@ import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
 import SemesterForm from './components/SemesterForm';
 import { loadSemesters, saveSemesters } from './storage/storage';
+import { getCumulativeReport } from './logic/logic';
 
 const App = () => {
   const [semesters, setSemesters] = useState(loadSemesters() ?? [])
@@ -38,9 +39,13 @@ const App = () => {
     saveSemesters(updatedSemesters)
   }
 
+  const cumulativeReport = getCumulativeReport();
+  const cap = cumulativeReport.cap.toFixed(2);
+
   return (
     <>
       <h1 style={{ textAlign: "center" }}>NUS CAPculator</h1>
+      <h2 style={{ textAlign: "center" }}>CAP: {cap}</h2>
       <Grid container spacing={2} padding={4}>
         {semesters.map(sem => (
           <Grid item xs={12} md={6}>
@@ -49,7 +54,7 @@ const App = () => {
         ))}
         <Grid item xs={12} md={12}>
           <Button onClick={handleOpen} variant="contained">
-            Add New Semester
+            Add Semester
           </Button>
         </Grid>
       </Grid>

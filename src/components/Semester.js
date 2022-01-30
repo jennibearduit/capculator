@@ -61,7 +61,7 @@ const Semester = (props) => {
           ))}
         </Table>
         <Button onClick={handleOpen} padding={4}>
-          Add New Module
+          Add Module
         </Button>
       </TableContainer>
       <ModuleForm open={open} onSubmit={handleSave} onClose={handleClose} />
