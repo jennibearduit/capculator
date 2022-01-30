@@ -6,7 +6,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ModuleForm from './ModuleForm'
 import { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 
 import Module from './Module';
 

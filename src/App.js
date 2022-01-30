@@ -1,5 +1,5 @@
 import Semester from './components/Semester'
-import { Button, Dialog, DialogActions, DialogContent, Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
 import SemesterForm from './components/SemesterForm';
 
@@ -18,7 +18,8 @@ const App = () => {
     setOpen(false);
   }
 
-  const handleSave = () => {
+  const handleSave = (sem) => {
+    setSemesters(semesters.concat(sem));
     setOpen(false);
   }
 
@@ -38,15 +39,8 @@ const App = () => {
           </Button>
         </Grid>
       </Grid>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogContent>
-          <SemesterForm />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSave}>Add Semester</Button>
-        </DialogActions>
-      </Dialog>
+      <SemesterForm open={open} onSubmit={handleSave} onClose={handleClose}/>
+      
     </>
   );
 }
