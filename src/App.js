@@ -64,13 +64,13 @@ const App = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>NUS CAPculator</h1>
+      <h1 className="appName">NUS CAPculator</h1>
       <Grid container alignItems="center">
         <Grid item xs={12} md={6} paddingRight={2}>
           <h2 style={{ textAlign: "right" }}>CAP: {cap}</h2>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Button onClick={refreshCap} paddingLeft={2}>
+          <Button onClick={refreshCap} paddingLeft={2} className="refreshButton">
             Refresh CAP
           </Button>
         </Grid>
@@ -82,7 +82,7 @@ const App = () => {
           </Grid>
         ))}
         <Grid item xs={12} md={12}>
-          <Button onClick={handleOpen} variant="contained">
+          <Button onClick={handleOpen} variant="contained" className="addSemesterButton">
             Add Semester
           </Button>
         </Grid>

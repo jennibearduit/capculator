@@ -83,7 +83,7 @@ const Semester = (props) => {
             <Module onEdit={handleEdit(i)} onDelete={handleDelete(i)} name={m.name} grade={m.grade} credits={m.credits} />
           ))}
         </Table>
-        <Button onClick={handleOpen} padding={4}>
+        <Button onClick={handleOpen} padding={4} className="addModuleButton">
           Add Module
         </Button>
       </TableContainer>
