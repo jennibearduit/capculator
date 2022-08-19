@@ -12,6 +12,5 @@ All you have to do is:
 
 Data will be persisted in your local storage, so you don't have to re-enter your grades if it was entered before!
 
-## Note
-
-This project is still a work in progress, and there will be future enhancements.
+## Display
+<img width="545" alt="Screenshot 2022-08-19 at 2 02 12 PM" src="https://user-images.githubusercontent.com/77873928/185553410-a4c68395-ff42-4cda-aa5d-e6e8339bf025.png">
